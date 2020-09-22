@@ -267,4 +267,27 @@ public class UserDAO implements IUserService {
 		return null;
 	}
 
+	
+	@Transactional(readOnly = true)
+	@Override
+	public List<User> topVisits() {
+		String sql = "CALL TOP_5_VISIT()";
+
+		List<User> listUser = jdbcTemplate.query(sql, new RowMapper<User>() {
+
+			@Override
+			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+				User user = new User();
+
+				user.setIdUser(rs.getLong("USER_ID"));
+				user.setUserName(rs.getString("USER_NAME"));
+				user.setUserImage(rs.getString("USER_IMAGE_PATH"));
+
+				return user;
+			}
+		});
+
+		return listUser;
+	}
+
 }

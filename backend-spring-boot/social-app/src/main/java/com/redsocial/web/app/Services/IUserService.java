@@ -30,11 +30,15 @@ public interface IUserService {
 	
 	
 	//Dont delete, implemented on oauth-service.
-		public List<User> findByUserMail(String email);
+	public List<User> findByUserMail(String email);
 	
 	// Profile picture upload for user id.
 	
 	public void updatePicture(MultipartFile picture, Long idUser) throws IllegalStateException, IOException;
+	
+	
+	//TOP5 VISITS
+	public List<User> topVisits();
 	
 
 }
